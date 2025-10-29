@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Reservation Page</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+	</head>
+	<body>
+			<div th:replace="fragments/header"></div>
+	
+		<h1 class="text-center mb-4">Reservation Page</h1>
+		
+		<form class="m-4" action="#" th:action="@{/reserve}" method="post">
+			<table class="table border">
+				<thead>
+					<tr>
+						<th class="text-center">Airline</th>
+						<th class="text-center">Departure Time</th>
+						<th class="text-center">Arrival Time</th>
+						<th class="text-center">Origin</th>
+						<th class="text-center">Destination</th>
+						<th class="text-center">Price</th>
+						<th class="text-center">Select</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="flight:${flights}">
+						<td class="p-1" th:text="${flight.airline_name}"></td>
+						<td class="p-1" th:text="${flight.departure_time}"></td>
+						<td class="p-1" th:text="${flight.arrival_time}"></td>
+						<td class="p-1" th:text="${flight.origin}"></td>
+						<td class="p-1" th:text="${flight.destination}"></td>
+						<td class="p-1" th:text="${#numbers.formatCurrency(flight.price)}"></td>
+						<td class="text-center"><input type="radio" name="chosen_flight" th:value="${flight.flight_id}" /></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="mb-4">
+				<label for="selected_departure_date">Departure Date</label>
+				<input name="selected_departure_date" id="selected_departure_date" type="date" />
+			</div>
+			<div>
+				<label for="num_of_passengers">Number of Passengers</label>
+				<input min="1" name="num_of_passengers" id="num_of_passengers" type="number" />
+			</div>
+			<button type="submit" class="btn btn-primary mt-4">Confirm Reservation</button>
+		</form>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+	</body>
+</html>
